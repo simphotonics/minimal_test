@@ -47,7 +47,7 @@ void tearDownAll(dynamic Function() callback) {
 void expect(dynamic expected, dynamic actual, {String reason = ''}) {
   if (expected == actual) {
     print(colorize(
-      '    passed${reason.isEmpty ? '' : ':$reason'}',
+      '    passed${reason.isEmpty ? '' : ': $reason'}',
       GREEN,
       colorOutput,
     ));
