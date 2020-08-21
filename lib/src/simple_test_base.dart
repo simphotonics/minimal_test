@@ -15,7 +15,7 @@ void test(String description, dynamic Function() body) {
   if (setupAllCallback != null) {
     setupAllCallback!();
   }
-  print('  $counter: ' + colorize(description, CYAN, colorOutput));
+  print('  test-$counter: ' + colorize(description, CYAN, colorOutput));
   body();
   if (teardownAllCallback != null) {
     teardownAllCallback!();
@@ -24,7 +24,7 @@ void test(String description, dynamic Function() body) {
 }
 
 void group(String description, dynamic Function() body) {
-  print(description);
+  print('group: ' + colorize(description, MAGENTA, colorOutput));
   body();
 }
 
@@ -47,17 +47,17 @@ void tearDownAll(dynamic Function() callback) {
 void expect(dynamic expected, dynamic actual, {String reason = ''}) {
   if (expected == actual) {
     print(colorize(
-      '       passed${reason.isEmpty ? '' : ':$reason'}',
+      '    passed${reason.isEmpty ? '' : ':$reason'}',
       GREEN,
       colorOutput,
     ));
   } else {
     print(
-      colorize('       failed', RED, colorOutput) +
+      colorize('    failed', RED, colorOutput) +
           '${reason.isEmpty ? '' : ': $reason'}',
     );
-    print('         Expected: $expected');
-    print('         Actual: $actual');
+    print('      Expected: $expected');
+    print('      Actual: $actual');
     throw FailedTestException(
       message: 'Equality test failed.',
       expected: expected,

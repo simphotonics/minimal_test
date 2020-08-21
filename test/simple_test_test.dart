@@ -17,17 +17,17 @@ late A a2;
 void main() {
   colorOutput = ColorOutput.ON;
 
-  group('Group of tests', () {
+  group('Class A', () {
     setUpAll(() {
       a1 = A('a1');
       a1_copy = a1;
       a2 = A('a2');
     });
 
-    test('First Test', () {
+    test('equality of copies', () {
       expect(a1, a1_copy);
     });
-    test('Second Test', () {
+    test('inequality of different instances', () {
       try {
         expect(a1, a2, reason: 'Expected to fail.');
       } on FailedTestException catch (e) {
