@@ -1,8 +1,8 @@
 name: simple_test
 
-description: A starting point for Dart libraries or applications.
+description: Ultra simple test suite for Dart scripts using null-safety features.
 
-version: 0.0.1
+version: 0.0.2
 
 homepage: https://github.com/simphotonics/simple_test
 
