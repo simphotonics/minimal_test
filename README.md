@@ -5,7 +5,7 @@ A library providing simple test functions. Aimed at testing Dart scripts with nu
 ## Usage
 
 ```Dart
-import 'package:simple_test/simple_test.dart';
+import 'package:minimal_test/minimal_test.dart';
 
 class A {
   A(this.msg);
@@ -41,11 +41,11 @@ void main() {
 
 To run the tests in this package use:
 ```Console
-$ dart --enable-experiment=non-nullable test/simple_test_test.dart
+$ dart --enable-experiment=non-nullable test/minimal_test_test.dart
 ```
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/simphotonics/simple_test
+[tracker]: https://github.com/simphotonics/minimal_test/tracker

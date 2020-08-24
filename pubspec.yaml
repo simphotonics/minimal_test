@@ -1,16 +1,15 @@
-name: simple_test
+name: minimal_test
 
 description: Ultra simple test suite for Dart scripts using null-safety features.
 
 version: 0.0.2
 
-homepage: https://github.com/simphotonics/simple_test
+homepage: https://github.com/simphotonics/minimal_test
 
 environment:
   sdk: '>=2.9.1 <3.0.0'
 
 dependencies:
-  meta: ^1.2.2
 
 dev_dependencies:
   pedantic: ^1.9.2
