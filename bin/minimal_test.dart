@@ -1,72 +1,26 @@
+import 'dart:async';
 import 'dart:io';
 
-import 'package:minimal_test/minimal_test.dart';
+import 'package:minimal_test/script_dependencies.dart';
 
-enum ExitCode {
-  Ok,
-  NoTestFilesFound,
-  SomeTestsFailed,
-}
-
-String _indent(
-  String input,
-  int spaces, {
-  String chars = ' ',
-  colorOutput = ColorOutput.ON,
-}) {
-  final lines = input.split('\n');
-  final indentString = chars.padRight(chars.length * spaces, chars);
-
-  final colorizedLines = <String>[];
-  for (final line in lines) {
-    if (line.startsWith('  test-')) {
-      colorizedLines.add(colorize(line, CYAN, colorOutput));
-    } else if (line.startsWith('group-')) {
-      colorizedLines.add(colorize(line, CYAN_BOLD, colorOutput));
-    } else if (line.startsWith('    passed')) {
-      colorizedLines.add(colorize(line, GREEN, colorOutput));
-    } else if (line.startsWith('    failed: ')) {
-      colorizedLines.add(colorize(line, YELLOW, colorOutput));
-    } else if (line.startsWith('    failed')) {
-      colorizedLines.add(colorize(line, RED, colorOutput));
-    } else {
-      colorizedLines.add(line);
-    }
-  }
-  return colorizedLines.map<String>((item) => indentString + item).join('\n');
-}
-
-/// Returns a list of resolved test files as `Future<List<File>>`.
-Future<List<File>> resolveTestFiles(String path) async {
-  final testFiles = <File>[];
-  final entityType = FileSystemEntity.typeSync(path);
-  if ((entityType == FileSystemEntityType.directory)) {
-    final directory = Directory(path);
-    await for (final entity in directory.list()) {
-      if (entity is File) {
-        if (entity.path.endsWith('_test.dart')) {
-          testFiles.add(entity);
-        }
-      }
-    }
-  } else if ((entityType == FileSystemEntityType.file)) {
-    testFiles.add(File(path));
-  }
-  return testFiles;
-}
-
+/// The script usage.
 const usage = '\n'
-    'Usage: minimal_test <test-directory/test-file> [--verbose] [--disableColorOutput]\n\n'
+    'Usage: minimal_test <test-directory/test-file> '
+    '[options]\n\n'
     '  Note: If a test-directory is specified, the program  will attempt \n'
     '        to run all dart files ending with \'_test.dart.\'\n\n'
     '  Options:\n'
-    '    --verbose                   Enables displaying error messages.\n'
-    '    --disableColorOutput        Disables color output.';
+    '    -h, --help                Shows script usage.\n'
+    '    -v, --verbose             Enables displaying error messages.\n'
+    '    --disable-color           Disables color output.\n';
 
 Future<void> main(List<String> args) async {
   // Resolving test files.
   if (args.isEmpty) {
     print('Please specify a path to a test directory or a test file.');
+    print(usage);
+    exit(ExitCode.NoTestFilesFound.index);
+  } else if (args[0] == '-h' || args[0] == '--h') {
     print(usage);
     exit(ExitCode.NoTestFilesFound.index);
   }
@@ -75,6 +29,7 @@ Future<void> main(List<String> args) async {
 
   if (testFiles.isEmpty) {
     print('Could not resolve any test files using path: ${args[0]}');
+    exit(ExitCode.NoTestFilesFound.index);
   } else {
     print('Finding test files: ');
     for (final file in testFiles) {
@@ -84,44 +39,67 @@ Future<void> main(List<String> args) async {
 
   // Reading script options
   final colorOutput =
-      args.contains('--disableColorOutput') ? ColorOutput.OFF : ColorOutput.ON;
+      args.contains('--disable-color') ? ColorOutput.OFF : ColorOutput.ON;
   final isVerbose = args.contains('--verbose');
 
+  // final results = Future<Map<String, ProcessResult>>(() {
+  //   final map = <String, ProcessResult>{};
+
+  //   for (final file in testFiles) {
+  //     Process.run(
+  //       'dart',
+  //       [
+  //         '--enable-experiment=non-nullable',
+  //         file.path,
+  //       ],
+  //     ).then((process) {
+  //       map[file.path] = process;
+  //     });
+  //   }
+
+  //   return map;
+  // });
+  final exitCodes = <String, Completer<int>>{};
+  final stderrOutput = <String, Completer<String>>{};
+  final results = <String, Future<ProcessResult>>{};
+
   // Starting processes.
-  final results = <ProcessResult>[];
-  final exitCodes = <int>[];
-
   for (final file in testFiles) {
-    results.add(await Process.run(
+    exitCodes[file.path] = Completer<int>();
+    stderrOutput[file.path] = Completer<String>();
+
+    results[file.path] = Process.run(
       'dart',
-      ['--enable-experiment=non-nullable', file.path],
-    ));
+      [
+        '--enable-experiment=non-nullable',
+        file.path,
+      ],
+    );
   }
 
-  var index = 0;
-  print('\nRunning tests:');
-  for (final result in results) {
-    print('  dart --enable-experiment==non-nullable ${testFiles[index].path}.');
-    final stdOutput = await result.stdout;
-    final stdError = await result.stderr;
-    print(_indent(stdOutput, 4, colorOutput: colorOutput));
+  print('Running test ... ');
+  results.forEach((path, result) {
+    result.then((res) {
+      print('  dart --enable-experiment=non-nullable $path.');
+      print(indent(res.stdout, 4, colorOutput: colorOutput));
+      if (isVerbose) {
+        // Indenting stderr output by 10 spaces.
+        print(indent(res.stderr, 10));
+      }
+      exitCodes[path]?.complete(res.exitCode);
+      stderrOutput[path]?.complete(res.stderr);
+    });
+  });
 
-    if (isVerbose) {
-      // Indenting stderr output by 8 spaces.
-      print(_indent(stdError, 8));
-    }
-    exitCodes.add(await result.exitCode);
-  }
+  //Future.wait(results).then((list) {});
 
-  for (var i = 0; i < results.length; ++i) {
-    if (exitCodes[i] != 0) {
-      print('Exiting with code: ${exitCodes[i]}.');
-      print('Exit code generated by running: ${testFiles[i]}.');
-      print(colorize('Some tests may have failed. ', RED, colorOutput));
-      exit(exitCodes[i]);
-    }
-  }
-
-  print('Tests ${colorize('passed', GREEN, colorOutput)} successfully.');
-  exit(ExitCode.Ok.index);
+  await exitMessage(
+    exitCodes: exitCodes,
+    stderrOutput: stderrOutput,
+    colorOutput: colorOutput,
+    isVerbose: isVerbose,
+  ).then<ExitMessage>((item) {
+    print(item.message);
+    exit(item.code);
+  });
 }
