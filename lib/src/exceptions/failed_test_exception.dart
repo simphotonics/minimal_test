@@ -1,3 +1,4 @@
+/// Exception used to signal that an [expect] test has failed.
 class FailedTestException implements Exception {
   FailedTestException({
     this.message = '',
@@ -12,7 +13,7 @@ class FailedTestException implements Exception {
   /// Generic object conveying information about the expected object.
   final Object expected;
 
-  /// Generic object conveying information about an actual object.
+  /// Generic object conveying information about the actual object.
   final Object actual;
 
   /// Script path where error is thrown.

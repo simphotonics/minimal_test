@@ -5,7 +5,7 @@ import 'test.dart';
 import 'exceptions/failed_test_exception.dart';
 import 'utils/string_utils.dart';
 
-final testFile = TestFile(Platform.script.path);
+// final _testFile = TestFile(Platform.script.path);
 
 /// Counters.
 int _testCounter = 0;
@@ -59,7 +59,7 @@ FutureOr<void> test(String description, dynamic Function() body) {
   }
 }
 
-/// Adds test contained in `body` to test group.
+/// Adds the tests contained in `body` to the current test group.
 FutureOr<void> group(String description, dynamic Function() body) {
   _enterGroup();
   print('group-$_groupCounter: $description');
@@ -73,18 +73,18 @@ FutureOr<void> group(String description, dynamic Function() body) {
 // /// Registers a function to be run after tests.
 // void tearDown(dynamic Function() callback) {}
 
-/// Registers a function to be run before each tests.
+/// Registers a function to be run before each test `body`.
 FutureOr<void> setUpAll(dynamic Function() callback) {
   _setupAllCallback = callback;
 }
 
-/// Registers a function to be run after each tests.
+/// Registers a function to be run after each tests `body`.
 FutureOr<void> tearDownAll(dynamic Function() callback) {
   _teardownAllCallback = callback;
 }
 
 /// Compares [expected] with [actual] and throws a [FailedTestException] if
-/// two objects are not equal.
+/// the two objects are not equal.
 void expect(dynamic expected, dynamic actual, {String reason = ''}) {
   if (expected == actual) {
     print('    passed${reason.isEmpty ? '' : ': $reason'}');

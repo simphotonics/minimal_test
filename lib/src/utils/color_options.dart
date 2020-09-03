@@ -27,7 +27,7 @@ const String YELLOW = '\u001B[33m';
 /// Ansi color modifier: magenta foreground.
 const String MAGENTA = '\u001B[35m';
 
-/// Transforms error/exception messages to an output string.
+/// Applies an ansi compliant color modifier to a `String`.
 String colorize(
   String message,
   String color,

@@ -19,7 +19,7 @@ extension StringBlock on String {
     return out.join('\\n\'\n') + '\'';
   }
 
-  /// Difference operator
+  /// Difference operator.
   String operator -(String other) {
     final length = min(this.length, other.length);
     var i = 0;
