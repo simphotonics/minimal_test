@@ -1,3 +1,7 @@
+## 0.0.4
+
+- Applied pedantic lints.
+
 
 ## 0.0.3
 
