@@ -9,5 +9,6 @@ linter:
 analyzer:
   enable-experiment:
    - non-nullable
+   #- extension-methods
 #   exclude:
 #     - path/to/excluded/files/**
