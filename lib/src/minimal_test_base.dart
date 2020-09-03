@@ -1,13 +1,35 @@
 import 'dart:async';
+import 'dart:io';
 
-import '../minimal_test.dart';
+import 'test.dart';
+import 'exceptions/failed_test_exception.dart';
+import 'utils/string_utils.dart';
 
-typedef Setup = dynamic Function();
-typedef Teardown = dynamic Function();
+final testFile = TestFile(Platform.script.path);
 
-/// Counts tests.
-int _testCounter = 1;
-int _groupCounter = 1;
+/// Counters.
+int _testCounter = 0;
+int _groupCounter = 0;
+int _groupTestCounter = 0;
+bool _inGroupBlock = false;
+
+void _enterGroup() {
+  _inGroupBlock = true;
+  ++_groupCounter;
+}
+
+void _leaveGroup() {
+  _inGroupBlock = false;
+  _groupTestCounter = 0;
+}
+
+void _enterTest() {
+  if (_inGroupBlock) {
+    ++_groupTestCounter;
+  } else {
+    ++_testCounter;
+  }
+}
 
 /// The callback used to setup tests.
 ///
@@ -21,21 +43,28 @@ Teardown? _teardownAllCallback;
 
 /// Performs a test by running the function `body`.
 FutureOr<void> test(String description, dynamic Function() body) {
+  _enterTest();
   if (_setupAllCallback != null) {
     _setupAllCallback!();
   }
-  print('  test-$_testCounter: $description');
+  if (_inGroupBlock) {
+    print('  test-$_groupTestCounter: $description');
+  } else {
+    print('test-$_testCounter: $description');
+  }
   body();
+
   if (_teardownAllCallback != null) {
     _teardownAllCallback!();
   }
-  ++_testCounter;
 }
 
 /// Adds test contained in `body` to test group.
 FutureOr<void> group(String description, dynamic Function() body) {
+  _enterGroup();
   print('group-$_groupCounter: $description');
   body();
+  _leaveGroup();
 }
 
 // /// Registers a function to be run before tests.
@@ -44,13 +73,13 @@ FutureOr<void> group(String description, dynamic Function() body) {
 // /// Registers a function to be run after tests.
 // void tearDown(dynamic Function() callback) {}
 
-/// Registers a function to be run once before all tests.
-void setUpAll(dynamic Function() callback) {
+/// Registers a function to be run before each tests.
+FutureOr<void> setUpAll(dynamic Function() callback) {
   _setupAllCallback = callback;
 }
 
-/// Registers a function to be run once after all tests.
-void tearDownAll(dynamic Function() callback) {
+/// Registers a function to be run after each tests.
+FutureOr<void> tearDownAll(dynamic Function() callback) {
   _teardownAllCallback = callback;
 }
 
@@ -61,12 +90,39 @@ void expect(dynamic expected, dynamic actual, {String reason = ''}) {
     print('    passed${reason.isEmpty ? '' : ': $reason'}');
   } else {
     print('    failed${reason.isEmpty ? '' : ': $reason'}');
-    print('      Expected: $expected');
-    print('      Actual: $actual');
-    throw FailedTestException(
-      message: 'Equality test failed.',
-      expected: expected,
-      actual: actual,
-    );
+    final expectedString = (expected is String)
+        ? expected.indentedBlock(8, skipFirstLine: true)
+        : expected.toString().indent(8, skipFirstLine: true);
+    final actualString = (actual is String)
+        ? actual.indentedBlock(8, skipFirstLine: true)
+        : actual.toString().indent(8, skipFirstLine: true);
+
+    final difference =
+        (expected is String) ? expectedString - actualString : '';
+
+    print('      Expected: $expectedString');
+    print('      Actual:   $actualString');
+    if (difference.isNotEmpty) {
+      print('      Difference: $difference');
+    }
+
+    try {
+      throw FailedTestException(
+        message: 'Equality test failed.',
+        expected: expected,
+        actual: actual,
+        path: Platform.script.path,
+      );
+    } catch (e, s) {
+      stderr.write(e.toString());
+
+      final lines = s.toString().split('\n');
+      final indentString = '  ';
+      stderr.writeln(lines
+          .map<String>(
+            (item) => indentString + item,
+          )
+          .join('\n'));
+    }
   }
 }
