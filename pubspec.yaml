@@ -9,7 +9,7 @@ version: 0.0.5
 homepage: https://github.com/simphotonics/minimal_test
 
 environment:
-  sdk: '>=2.9.0 <3.0.0'
+  sdk: '>=2.10.0-0.0.dev <3.0.0'
 
 dependencies:
 
