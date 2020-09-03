@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:minimal_test/script_dependencies.dart';
+import 'package:minimal_test/src/process/exit_code.dart';
+import 'package:minimal_test/src/process/test_process_result.dart';
+import 'package:minimal_test/src/utils/color_options.dart';
+import 'package:minimal_test/src/process/test_process.dart';
+import 'package:minimal_test/src/utils/file_utils.dart';
 
 /// The script usage.
 const usage = '\n'
@@ -52,7 +56,7 @@ Future<void> main(List<String> args) async {
   // Starting processes.
   final fResults = <Future<TestProcessResult>>[];
   for (final file in testFiles) {
-    fResults.add(TestProcess.run(
+    fResults.add(TestProcess.runTest(
       'dart',
       [
         '--enable-experiment=non-nullable',
