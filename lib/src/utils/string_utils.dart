@@ -87,9 +87,9 @@ extension StringBlock on String {
     return out.join('\n');
   }
 
-  /// Returns the number of times [substring] is found in `this`.
+  /// Returns the number of times `substring` is found in `this`.
   /// * Substrings are counted in a non-overlapping fashion.
-  /// * Returns `1` if [substring] is the empty String.
+  /// * Returns `1` if `substring` is the empty String.
   int countSubstring(String substring) {
     final skip = substring.length;
     var count = 0;
