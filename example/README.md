@@ -61,3 +61,5 @@ Future<void> main() async {
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/simphotonics/minimal_test
+
+[async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
