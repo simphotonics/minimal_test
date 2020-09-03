@@ -172,54 +172,54 @@ class TestProcessResult extends ProcessResult {
     }
     return colorizedLines;
   }
-}
 
-// Returns an object of type `Future<ExitMessage>`.
-/// * Checks if the test processes exited normally.
-/// * Checks if stderr contains the string `FailedTestException`.
-ExitMessage exitMessage({
-  required List<TestProcessResult> results,
-  required ColorOutput colorOutput,
-  bool isVerbose = false,
-}) {
-  var msg = '';
-  var exitCode = 0;
-  var numberOfFailedTests = 0;
+  /// Returns an object of type [ExitMessage].
+  /// * Checks if the test processes exited normally.
+  /// * Checks if stderr contains the string `FailedTestException`.
+  static ExitMessage exitMessage({
+    required List<TestProcessResult> results,
+    required ColorOutput colorOutput,
+    bool isVerbose = false,
+  }) {
+    var msg = '';
+    var exitCode = 0;
+    var numberOfFailedTests = 0;
 
-  for (final result in results) {
-    numberOfFailedTests += result.failedTests;
-  }
-
-  if (numberOfFailedTests > 0) {
-    msg = '\nNumber of failed tests: ${colorize(
-      numberOfFailedTests.toString(),
-      RED,
-      colorOutput,
-    )}.\n';
-    exitCode = ExitCode.SomeTestsFailed.index;
-  }
-
-  for (final result in results) {
-    if (result.exitCode != 0) {
-      exitCode = result.exitCode;
-      msg = msg +
-          'Command: ${result.command} \n'
-              '  exited abnormally with code: '
-              '${colorize(exitCode.toString(), RED, colorOutput)}. \n'
-              '${isVerbose ? '' : 'Try using the option --verbose for more details.'}\n' +
-          colorize('Some tests may have been skipped. \n', RED, colorOutput);
+    for (final result in results) {
+      numberOfFailedTests += result.failedTests;
     }
-  }
 
-  if (exitCode == ExitCode.SomeTestsFailed.index) {
-    msg = msg +
-        'Exiting with ExitCode.SomeTestsFailed: ' +
-        colorize(exitCode.toString(), RED, colorOutput) +
-        '.';
+    if (numberOfFailedTests > 0) {
+      msg = '\nNumber of failed tests: ${colorize(
+        numberOfFailedTests.toString(),
+        RED,
+        colorOutput,
+      )}.\n';
+      exitCode = ExitCode.SomeTestsFailed.index;
+    }
+
+    for (final result in results) {
+      if (result.exitCode != 0) {
+        exitCode = result.exitCode;
+        msg = msg +
+            'Command: ${result.command} \n'
+                '  exited abnormally with code: '
+                '${colorize(exitCode.toString(), RED, colorOutput)}. \n'
+                '${isVerbose ? '' : 'Try using the option --verbose for more details.'}\n' +
+            colorize('Some tests may have been skipped. \n', RED, colorOutput);
+      }
+    }
+
+    if (exitCode == ExitCode.SomeTestsFailed.index) {
+      msg = msg +
+          'Exiting with ExitCode.SomeTestsFailed: ' +
+          colorize(exitCode.toString(), RED, colorOutput) +
+          '.';
+    }
+    if (exitCode == 0) {
+      msg = '${colorize('Completed successfully.', GREEN, colorOutput)} \n'
+          'Exiting with code: 0.\n';
+    }
+    return ExitMessage(msg, exitCode);
   }
-  if (exitCode == 0) {
-    msg = '${colorize('Completed successfully.', GREEN, colorOutput)} \n'
-        'Exiting with code: 0.\n';
-  }
-  return ExitMessage(msg, exitCode);
 }

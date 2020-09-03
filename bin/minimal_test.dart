@@ -85,7 +85,7 @@ Future<void> main(List<String> args) async {
 
   // Composing exit message.
   final results = await Future.wait(fResults);
-  final exitMsg = exitMessage(
+  final exitMsg = TestProcessResult.exitMessage(
     results: results,
     colorOutput: colorOutput,
     isVerbose: isVerbose,

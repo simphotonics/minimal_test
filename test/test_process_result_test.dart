@@ -26,7 +26,7 @@ Future<void> main() async {
   await Future.wait<TestProcessResult>(fResults).then((results) {
     group('exitMessage', () {
       test('Some tests failed.', () {
-        final exitMsg = exitMessage(
+        final exitMsg = TestProcessResult.exitMessage(
           results: [results[0]],
           isVerbose: true,
           colorOutput: ColorOutput.OFF,
@@ -40,7 +40,7 @@ Future<void> main() async {
         expect(exitMsg.code, 2);
       });
       test('Exited abnormally.', () {
-        final exitMsg = exitMessage(
+        final exitMsg = TestProcessResult.exitMessage(
           results: [results[1]],
           isVerbose: true,
           colorOutput: ColorOutput.OFF,
@@ -56,7 +56,7 @@ Future<void> main() async {
         expect(exitMsg.code, 255);
       });
       test('Completed successfully.', () {
-        final exitMsg = exitMessage(
+        final exitMsg = TestProcessResult.exitMessage(
           results: [results[2]],
           isVerbose: true,
           colorOutput: ColorOutput.OFF,
