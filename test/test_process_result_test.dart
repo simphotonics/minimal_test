@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:minimal_test/minimal_test.dart';
 import 'package:minimal_test/script_dependencies.dart';
 
-
 Future<void> main() async {
   final testFiles = [
     'test/src/class_a.dart',

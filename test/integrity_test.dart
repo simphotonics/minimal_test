@@ -55,7 +55,7 @@ Future<void> main() async {
       );
     });
     test('C: completed', () {
-       expect(
+      expect(
         processC.stdout.contains('Completed successfully.'),
         true,
       );
@@ -131,7 +131,8 @@ Future<void> main() async {
     });
     test('D', () {
       expect(
-          processD.stdout,'Could not resolve any test files using path: test/unknown.dart\n'
+          processD.stdout,
+          'Could not resolve any test files using path: test/unknown.dart\n'
           'Please specify a path to a test directory containing test files.\n'
           '\n'
           'Usage: minimal_test [<test-directory/test-file>] [options]\n'

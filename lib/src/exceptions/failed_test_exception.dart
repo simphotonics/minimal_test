@@ -1,4 +1,3 @@
-
 class FailedTestException implements Exception {
   FailedTestException({
     this.message = '',

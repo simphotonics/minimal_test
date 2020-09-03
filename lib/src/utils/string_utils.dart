@@ -1,4 +1,3 @@
-
 import 'dart:math' show min;
 
 extension StringBlock on String {
@@ -21,11 +20,11 @@ extension StringBlock on String {
   }
 
   /// Difference operator
-  String operator -(String other){
+  String operator -(String other) {
     final length = min(this.length, other.length);
     var i = 0;
-    for(i; i < length; ++i){
-      if(this[i] != other[i]){
+    for (i; i < length; ++i) {
+      if (this[i] != other[i]) {
         break;
       }
     }
@@ -45,7 +44,7 @@ extension StringBlock on String {
     String chars = ' ',
     bool skipFirstLine = false,
   }) {
-    final indentString = chars*indentMultiplier;
+    final indentString = chars * indentMultiplier;
     if (isEmpty) {
       return (skipFirstLine) ? '\'\'' : '$indentString\'\'';
     }
@@ -63,7 +62,6 @@ extension StringBlock on String {
     return out.join('\\n\'\n') + '\'';
   }
 
-
   /// Indents the current string by prefixing each
   /// line with `chars` (repeated `indentMultiplier` times).
   String indent(
@@ -71,7 +69,7 @@ extension StringBlock on String {
     String chars = ' ',
     bool skipFirstLine = false,
   }) {
-    var indentString = chars*indentMultiplier;
+    var indentString = chars * indentMultiplier;
     if (isEmpty) {
       return (skipFirstLine) ? '' : '$indentString';
     }
