@@ -5,9 +5,9 @@ A minimalist library for writing simple tests. Aimed at testing Dart VM scripts 
 Using this package introduces no further dependencies other than Dart SDK >= 2.9.0.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
-recommended to use the package [`test`][test].
+recommended to use the official package [test].
 
-Note: In the context of this package, the functions [`group`][group] and [`test_function`][test] are merely used to organize and label tests and test-groups.
+Note: In the context of this package, the functions [`group`][group] and [`test`][test_function] are merely used to organize and label tests and test-groups.
 Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all expect-tests are passed and none of the test files
 exits abnormally.
 
