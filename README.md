@@ -7,19 +7,19 @@ Using this package introduces no further dependencies other than Dart SDK >= 2.9
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the package [`test`][test].
 
-Note: In the context of this package, the functions `group` and `test` are merely used to organize and label tests and test-groups.
-Each call to `expect` is counted as a test. A test run will complete successfully if all expect-tests are passed and none of the test files
+Note: In the context of this package, the functions [`group`][group] and [`test_function`][test] are merely used to organize and label tests and test-groups.
+Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all expect-tests are passed and none of the test files
 exits abnormally.
 
 ## Usage
 
 The library provides the functions:
-* `group`: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
-one or several calls to `test`.
-* `test`: The body of this function usually contains one or several calls to `expect`.
-* `setUpAll`: A callback that is run before the `body` of `test`.
-* `tearDownAll`: A callback that is run after the `body` of `test` has finished.
-* `expect`: Compares two objects. An expect-test is considered passed if the two objects are equal.
+* [`group`][group]: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
+    one or several calls to `test`.
+* [`test`][test_function]: The body of this function usually contains one or several calls to [`expect`][expect].
+* [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
+* [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
+* [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects are equal.
 
 ```Dart
 import 'package:minimal_test/minimal_test.dart';
@@ -73,7 +73,7 @@ test-groups and tests. As such, shuffling of tests is not supported.
 
 While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
-`group`, `test`, and `expect`. Otherwise, the output of `expect` might not
+[`group`][group], [`test`][test_function], and [`expect`][expect]. Otherwise, the output of [`expect`][expect] might not
 occur on the right line resulting in a confusing test-report.
 File [`async_test.dart`][async_test.dart] shows how to test the result of a future calculation.
 
@@ -87,3 +87,9 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 [test]: https://pub.dev/packages/test
 
 [async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
+
+[expect]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/group.html
+[group]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/group.html
+[setUpAll]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/setUpAll.html
+[test_function]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/test.html
+[tearDownAll]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/tearDownAll.html
