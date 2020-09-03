@@ -34,6 +34,8 @@ dartfmt -w $(find bin lib test -name \*.dart 2>/dev/null)
 echo
 echo -e "${BLUE}=== Analyzing $PWD...${RESET}"
 echo
+echo dartanalyzer --version
+echo
 
 dartanalyzer --enable-experiment=non-nullable \
     --fatal-warnings \
