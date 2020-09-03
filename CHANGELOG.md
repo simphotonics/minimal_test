@@ -1,7 +1,10 @@
+## 0.0.5
+
+- Amended links in `README.md`.
+
 ## 0.0.4
 
 - Applied pedantic lints.
-
 
 ## 0.0.3
 
