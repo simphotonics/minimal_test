@@ -1,6 +1,9 @@
+
+
 ## 0.0.5
 
 - Amended links in `README.md`.
+- Increased min SDK version.
 
 ## 0.0.4
 

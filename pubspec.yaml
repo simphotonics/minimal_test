@@ -2,7 +2,7 @@ name: minimal_test
 
 description:
   Minimalist library for testing Dart VM scripts using null-safety features.
-  Has no external dependencies other than Dart SDK >=2.9.0.
+  Has no external dependencies other than Dart SDK >=2.10.0-0.0.dev.
 
 version: 0.0.5
 
