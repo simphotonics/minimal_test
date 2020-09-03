@@ -1,6 +1,8 @@
 
 ## Minimal Test - Example
 
+[![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
+
 
 ## Asynchronous Tests
 
