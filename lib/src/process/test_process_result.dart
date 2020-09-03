@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io' hide stderr, stdout;
 
 import '../utils/string_utils.dart';
@@ -172,34 +171,6 @@ class TestProcessResult extends ProcessResult {
       }
     }
     return colorizedLines;
-  }
-}
-
-extension TestProcess on Process {
-  static Future<TestProcessResult> run(
-    String executable,
-    List<String> arguments, {
-    String? workingDirectory,
-    Map<String, String>? environment,
-    bool includeParentEnvironment = true,
-    bool runInShell = false,
-    Encoding? stdoutEncoding = systemEncoding,
-    Encoding? stderrEncoding = systemEncoding,
-  }) {
-    return Process.run(executable, arguments,
-            workingDirectory: workingDirectory,
-            environment: environment,
-            includeParentEnvironment: includeParentEnvironment,
-            runInShell: runInShell,
-            stdoutEncoding: stdoutEncoding,
-            stderrEncoding: stderrEncoding)
-        .then((processResult) {
-      return (TestProcessResult.from(
-        processResult: processResult,
-        executable: executable,
-        arguments: arguments,
-      ));
-    });
   }
 }
 
