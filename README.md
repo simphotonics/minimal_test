@@ -86,7 +86,6 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 [test]: https://pub.dev/packages/test
 
-
 [async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
 
 [expect]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
