@@ -86,10 +86,15 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 [test]: https://pub.dev/packages/test
 
+
 [async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
 
-[expect]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/group.html
-[group]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/group.html
-[setUpAll]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/setUpAll.html
-[test_function]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/test.html
-[tearDownAll]: https://pub.dev/packages/minimal_test/doc/api/minimal_test/tearDownAll.html
+[expect]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
+
+[group]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
+
+[setUpAll]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/setUpAll.html
+
+[test_function]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/test.html
+
+[tearDownAll]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/tearDownAll.html
