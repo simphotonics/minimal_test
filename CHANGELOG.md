@@ -1,6 +1,6 @@
 
 
-## 0.0.5
+## 0.0.5-nullsafety
 
 - Amended links in `README.md`.
 - Increased min SDK version.
