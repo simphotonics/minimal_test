@@ -1,5 +1,6 @@
 library color_options;
 
+/// Used to enable/disable color output.
 enum ColorOutput { ON, OFF }
 
 /// Ansi color modifier: Reset to default.
