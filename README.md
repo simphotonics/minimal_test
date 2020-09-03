@@ -1,8 +1,24 @@
-## Simple Test
+## Minimal Test
 
-A library providing simple test functions. Aimed at testing Dart scripts with null-safety enabled.
+A library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
+Has **no dependencies** other than Dart SDK >= 2.9.0.
+
+For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
+recommended to use the package [`test`][test].
+
+Note: In the context of this package, the functions `group` and `test` are merely used to organize and label tests and test-groups.
+Each call to `expect` is counted as a test. A test run will complete successfully if all expect-tests are passed and none of the test files
+exits abnormally.
 
 ## Usage
+
+The library provides the functions:
+* `group`: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
+one or several calls to `test`.
+* `test`: The body of this function usually contains one or several calls to `expect`.
+* `setUpAll`: A callback that is run before the `body` of `test`.
+* `tearDownAll`: A callback that is run after the `body` of `test` has finished.
+* `expect`: Compares two objects. An expect-test is considered passed if the two objects are equal.
 
 ```Dart
 import 'package:minimal_test/minimal_test.dart';
@@ -22,13 +38,13 @@ late A a1_copy;
 late A a2;
 
 void main() {
-  group('Group of tests', () {
-    setUpAll(() {
-      a1 = A('a1');
-      a1_copy = a1;
-      a2 = A('a2');
-    });
+  setUpAll(() {
+    a1 = A('a1');
+    a1_copy = a1;
+    a2 = A('a2');
+  });
 
+  group('Group of tests', () {
     test('First Test', () {
       expect(a1, a1_copy);
     });
@@ -38,14 +54,33 @@ void main() {
   });
 }
 ```
+The script `bin\minimal_test.dart` attempts to find test-files specified
+by the user. If no path is provided, the progam will scan the folder `test`.
+It then attempts to run each test-file and generate a report by inspecting
+the process stdout, stderr, and exit codes.
 
-To run the tests in this package use:
+To run the tests in the `test` folder, navigate to the package root and use:
 ```Console
-$ dart --enable-experiment=non-nullable test/minimal_test_test.dart
+$ dart --enable-experiment=non-nullable bin/minimal_test.dart
 ```
+
+## Limitations
+
+To keep the library as simple as possible, test files are not parsed
+and there is no provision to generate and inspect a node-structure of
+test-groups and tests. As such, shuffling of tests is not supported.
+
+While it is possible to run **asynchronous** tests, it is recommended
+to await the completion of the objects being tested before issuing a call to
+`group`, `test`, and `expect`. Otherwise, the output of `expect` might not
+occur on the right line resulting in a confusing test-report.
+File `async_test` shows how to test the result to future calculation.
+
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/simphotonics/minimal_test/tracker
+
+[test]: https://pub.dev/packages/test
