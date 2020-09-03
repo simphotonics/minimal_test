@@ -2,7 +2,6 @@ import 'package:minimal_test/minimal_test.dart';
 import 'package:minimal_test/script_dependencies.dart';
 
 void main() {
-  
   group('block', () {
     test('empty', () {
       expect(''.block, '\'\'');
