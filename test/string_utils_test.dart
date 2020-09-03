@@ -2,10 +2,7 @@ import 'package:minimal_test/minimal_test.dart';
 import 'package:minimal_test/script_dependencies.dart';
 
 void main() {
-  // Future<T> later<T>(T t, {Duration duration = const Duration(seconds: 1)}) {
-  //   return Future.delayed(duration, () => t);
-  // }
-
+  
   group('block', () {
     test('empty', () {
       expect(''.block, '\'\'');
