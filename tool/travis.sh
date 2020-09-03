@@ -45,4 +45,4 @@ dartanalyzer --enable-experiment=non-nullable \
 echo
 echo -e "${CYAN}=== Testing $PWD...${RESET}"
 echo
-dart --enable-experiment=non-nullable bin/minimal_test.dart
+dart --enable-experiment=non-nullable bin/minimal_test
