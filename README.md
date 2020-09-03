@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
 
 A minimalist library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
-Using this package introduces no further dependencies other than Dart SDK >= 2.9.0.
+Using this package introduces no further dependencies other than Dart SDK >= 2.10.0-0.0.dev.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the official package [test].
