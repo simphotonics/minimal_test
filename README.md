@@ -1,4 +1,4 @@
-## Minimal Test
+# Minimal Test
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
 
 A library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
