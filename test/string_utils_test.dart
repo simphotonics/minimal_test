@@ -1,5 +1,5 @@
 import 'package:minimal_test/minimal_test.dart';
-import 'package:minimal_test/script_dependencies.dart';
+import 'package:minimal_test/src/utils/string_utils.dart';
 
 void main() {
   group('block', () {

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:minimal_test/minimal_test.dart';
-import 'package:minimal_test/script_dependencies.dart';
+import 'package:minimal_test/src/process/test_process.dart';
+import 'package:minimal_test/src/process/test_process_result.dart';
+import 'package:minimal_test/src/utils/color_options.dart';
 
 Future<void> main() async {
   final testFiles = [
@@ -12,7 +14,7 @@ Future<void> main() async {
 
   final fResults = <Future<TestProcessResult>>[];
   for (final file in testFiles) {
-    fResults.add(TestProcess.run(
+    fResults.add(TestProcess.runTest(
       'dart',
       [
         '--enable-experiment=non-nullable',
