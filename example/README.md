@@ -1,48 +1,59 @@
 
-## Simple Test - Example
+## Minimal Test - Example
 
-A library providing simple test functions. Aimed at testing Dart scripts with null-safety enabled.
 
-## Usage
+## Asynchronous Tests
 
+While it is possible to run **asynchronous** tests, it is recommended
+to await the completion of the objects being tested before issuing a call to
+`group`, `test`, and `expect`. Otherwise, the output of `expect` might not
+occur on the right line resulting in a confusing test-report.
+File [`async_test.dart`][async_test.dart] shows how to
+test the result of a future calculation:
 ```Dart
+import 'dart:async';
+
 import 'package:minimal_test/minimal_test.dart';
 
-class A {
-  A(this.msg);
-  final String msg;
-
-  @override
-  String toString() {
-    return 'Awesome: $msg';
-  }
+Future<T> later<T>(
+  T t, {
+  Duration duration = const Duration(microseconds: 100),
+}) {
+  return Future.delayed(duration, () => t);
 }
 
-late A a1;
-late A a1_copy;
-late A a2;
+Future<void> main() async {
+  final a = [await later(17), await later(27)];
 
-void main() {
-  group('Group of tests', () {
-    setUpAll(() {
-      a1 = A('a1');
-      a1_copy = a1;
-      a2 = A('a2');
+  group('int', () {
+    test('17', () {
+      expect(a[0], 17);
     });
 
-    test('First Test', () {
-      expect(a1, a1_copy);
+    test('27', () {
+      expect(a[1], 27);
     });
-    test('Second Test', () {
-      expect(a1, a2);
+  });
+
+  final b = [
+    await later(
+      'seventeen',
+      duration: Duration(
+        microseconds: 230,
+      ),
+    ),
+    await later('twentyseven'),
+  ];
+
+  group('Await in expect', () {
+    test('seventeen', () {
+      expect(b[0], 'seventeen');
+    });
+    test('twentyseven', () {
+      expect(b[1], 'twentyseven');
     });
   });
 }
-```
-
-To run the tests in this package use:
-```Console
-$ dart --enable-experiment=non-nullable test/minimal_test_test.dart
 ```
 
 ## Features and bugs
