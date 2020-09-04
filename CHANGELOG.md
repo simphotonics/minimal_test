@@ -1,4 +1,7 @@
+## 0.0.5
 
+- Amended section usage.
+- Set min SDK version to 2.10.0-0.0.beta.
 
 ## 0.0.5-nullsafety
 
