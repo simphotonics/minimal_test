@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
 
 A minimalist library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
-Using this package introduces no further dependencies other than Dart SDK >= 2.10.0-0.0.dev.
+Using this package introduces no further dependencies other than Dart SDK >= 2.10.0-0.0.beta.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the official package [test].
@@ -62,8 +62,14 @@ the process stdout, stderr, and exit codes.
 
 To run the tests in the `test` folder, navigate to the package root and use:
 ```Console
-$ dart --enable-experiment=non-nullable bin/minimal_test.dart
+# pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
+Alternatively, one may use:
+```Console
+# pub global activate minimal_test
+```
+to create a Dart snapshot making `minimal_test` available as
+a console command.
 
 ## Limitations
 
