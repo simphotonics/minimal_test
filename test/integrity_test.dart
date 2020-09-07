@@ -7,19 +7,19 @@ Future<void> main() async {
   final processA = await Process.run('dart', [
     '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
-    'test/src/class_a.dart',
+    'test/src/class_a_test.dart',
     '--disable-color',
   ]);
   final processB = await Process.run('dart', [
     '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
-    'test/src/class_b.dart',
+    'test/src/class_b_test.dart',
     '--disable-color',
   ]);
   final processC = await Process.run('dart', [
     '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
-    'test/src/class_c.dart',
+    'test/src/class_c_test.dart',
     '--disable-color',
   ]);
   final processD = await Process.run('dart', [
@@ -64,7 +64,7 @@ Future<void> main() async {
 
   group('Input files', () {
     test('A', () {
-      expect(processA.stdout.contains('test/src/class_a.dart'), true);
+      expect(processA.stdout.contains('test/src/class_a_test.dart'), true);
     });
     test('D', () {
       expect(
@@ -79,8 +79,8 @@ Future<void> main() async {
       expect(
           processA.stdout,
           'Finding test files: \n'
-          '  test/src/class_a.dart\n'
-          'Running test: dart --enable-experiment=non-nullable test/src/class_a.dart\n'
+          '  test/src/class_a_test.dart\n'
+          'Running test: dart --enable-experiment=non-nullable test/src/class_a_test.dart\n'
           '  test-1: 1) outside group\n'
           '      failed\n'
           '        Expected: \'a\'\n'
@@ -116,13 +116,13 @@ Future<void> main() async {
       expect(
           processB.stdout,
           'Finding test files: \n'
-          '  test/src/class_b.dart\n'
-          'Running test: dart --enable-experiment=non-nullable test/src/class_b.dart\n'
+          '  test/src/class_b_test.dart\n'
+          'Running test: dart --enable-experiment=non-nullable test/src/class_b_test.dart\n'
           '  group-1: Class B\n'
           '    test-1: equality of copies\n'
           '      passed\n'
           '  \n'
-          'Command: dart --enable-experiment=non-nullable test/src/class_b.dart \n'
+          'Command: dart --enable-experiment=non-nullable test/src/class_b_test.dart \n'
           '  exited abnormally with code: 255. \n'
           'Try using the option --verbose for more details.\n'
           'Some tests may have been skipped. \n'

@@ -7,9 +7,9 @@ import 'package:minimal_test/src/utils/color_options.dart';
 
 Future<void> main() async {
   final testFiles = [
-    'test/src/class_a.dart',
-    'test/src/class_b.dart',
-    'test/src/class_c.dart',
+    'test/src/class_a_test.dart',
+    'test/src/class_b_test.dart',
+    'test/src/class_c_test.dart',
   ];
 
   final fResults = <Future<TestProcessResult>>[];
@@ -47,7 +47,7 @@ Future<void> main() async {
         );
         expect(
           exitMsg.message,
-          'Command: dart --enable-experiment=non-nullable test/src/class_b.dart \n'
+          'Command: dart --enable-experiment=non-nullable test/src/class_b_test.dart \n'
           '  exited abnormally with code: 255. \n'
           '\n'
           'Some tests may have been skipped. \n'
