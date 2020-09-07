@@ -69,8 +69,10 @@ Alternatively, the path to a test file or test directory may be specified:
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 test/src/class_a_test.dart
 ```
-    ![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
+
+![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
 <details> <summary> Show console output. </summary>
+![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
 </details>
 
 ## Limitations
