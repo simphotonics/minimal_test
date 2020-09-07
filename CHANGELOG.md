@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Set min SDK version to 2.9.0.
+
 ## 0.0.5
 
 - Amended section usage.
