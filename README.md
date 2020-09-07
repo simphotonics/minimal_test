@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
 
 A minimalist library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
-Using this package introduces no further dependencies other than Dart SDK >= 2.10.0-0.0.beta.
+Using this package introduces no further dependencies other than Dart SDK >= 2.9.0.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the official package [test].
@@ -64,12 +64,6 @@ To run the tests in the `test` folder, navigate to the package root and use:
 ```Console
 # pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
-Alternatively, one may use:
-```Console
-# pub global activate minimal_test
-```
-to create a Dart snapshot making `minimal_test` available as
-a console command.
 
 ## Limitations
 
@@ -79,9 +73,11 @@ test-groups and tests. As such, shuffling of tests is not supported.
 
 While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
-[`group`][group], [`test`][test_function], and [`expect`][expect]. Otherwise, the output of [`expect`][expect] might not
+[`group`][group], [`test`][test_function], and [`expect`][expect].
+Otherwise, the output of [`expect`][expect] might not
 occur on the right line resulting in a confusing test-report.
-File [`async_test.dart`][async_test.dart] shows how to test the result of a future calculation.
+File [`async_test.dart`][async_test.dart] shows how to test
+the result of a future calculation.
 
 
 ## Features and bugs
