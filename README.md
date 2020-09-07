@@ -62,8 +62,46 @@ the process stdout, stderr, and exit codes.
 
 To run the tests in the `test` folder, navigate to the package root and use:
 ```Console
-# pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
+$ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
+Alternatively, the path to a test file or test directory may be specified:
+```Console
+$ dart --enable-experiment=non-nullable bin/minimal_test.dart test/src/class_a.dart
+Finding test files:
+  test/src/class_a.dart
+Running test: dart --enable-experiment=non-nullable test/src/class_a.dart
+<span style="color:red">cardinals</span>
+  test-1: 1) outside group
+      failed
+        Expected: 'a'
+        Actual:   'b'
+        Difference: a'
+  test-2: 2) outside group
+      passed
+  group-1: Class A
+    test-1: equality of copies
+      passed
+    test-2: inequality of different instances
+      failed: Expected to fail.
+        Expected: A: a1
+        Actual:   A: a2
+    test-3: test exception
+      failed
+        Expected: A: a1
+        Actual:   A: a2
+  test-3: third test outside group
+      failed
+        Expected: 'First line.\n'
+          'Second line'
+        Actual:   'First line.\n'
+          'Second line.'
+        Difference: '
+
+
+Number of failed tests: 4.
+Exiting with ExitCode.SomeTestsFailed: 2.
+```
+
 
 ## Limitations
 
