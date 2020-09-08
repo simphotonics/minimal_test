@@ -41,6 +41,14 @@ Setup? _setupAllCallback;
 /// It is called before a test exits.
 Teardown? _teardownAllCallback;
 
+/// Adds the tests contained in `body` to the current test group.
+FutureOr<void> group(String description, dynamic Function() body) {
+  _enterGroup();
+  print('group-$_groupCounter: $description');
+  body();
+  _leaveGroup();
+}
+
 /// Performs a test by running the function `body`.
 FutureOr<void> test(String description, dynamic Function() body) {
   _enterTest();
@@ -57,14 +65,6 @@ FutureOr<void> test(String description, dynamic Function() body) {
   if (_teardownAllCallback != null) {
     _teardownAllCallback!();
   }
-}
-
-/// Adds the tests contained in `body` to the current test group.
-FutureOr<void> group(String description, dynamic Function() body) {
-  _enterGroup();
-  print('group-$_groupCounter: $description');
-  body();
-  _leaveGroup();
 }
 
 // /// Registers a function to be run before tests.
