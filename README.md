@@ -85,8 +85,11 @@ test-groups and tests. As such, shuffling of tests is not supported.
 While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
 [`group`][group], [`test`][test_function], and [`expect`][expect].
-Otherwise, the output of [`expect`][expect] might not
-occur on the right line resulting in a confusing test-report.
+Otherwise, the output printed by the method [`expect`][expect] might not
+occur on the right line making it difficult to identify which tests failed/passed.
+However, the total number of failed/passed tests
+is reported correctly.
+
 File [`async_test.dart`][async_test.dart] shows how to test
 the result of a future calculation.
 
