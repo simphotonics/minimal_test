@@ -115,8 +115,8 @@ void expect(
     if (actualString == expectedString) {
       actualString += ' (${actual.runtimeType}, '
           'hashCode: ${actual.hashCode})';
-      expectedString += ' (${expected.runtimeType}), '
-          '(hashCode: ${expected.hashCode})';
+      expectedString += ' (${expected.runtimeType}, '
+          'hashCode: ${expected.hashCode})';
     }
 
     print('      Actual:   $actualString');
