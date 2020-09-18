@@ -1,14 +1,15 @@
 ## Minimal Test
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
 
-A minimalist library for writing simple tests. Aimed at testing Dart VM scripts using null-safety features.
+A minimalist library for writing simple tests.
 Using this package introduces no further dependencies other than Dart SDK >= 2.9.0.
+Aimed at testing Dart VM scripts using null-safety.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the official package [test].
 
 Note: In the context of this package, the functions [`group`][group] and [`test`][test_function] are merely used to organize and label tests and test-groups.
-Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all expect-tests are passed and none of the test files
+Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all *expect-tests* are passed and none of the test files
 exits abnormally.
 
 ## Usage
@@ -19,7 +20,7 @@ The library provides the functions:
 * [`test`][test_function]: The body of this function usually contains one or several calls to [`expect`][expect].
 * [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
 * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
-* [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects are equal.
+* [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match. (Matching should be understood as a form of lax equality test. For example two lists match if their entries match.)
 
 ```Dart
 import 'package:minimal_test/minimal_test.dart';
@@ -34,6 +35,12 @@ class A {
   }
 }
 
+bool isEqualA(left, right){
+  if (left is! A || right is! A) return false;
+  return left.msg == right.msg;
+}
+
+
 late A a1;
 late A a1_copy;
 late A a2;
@@ -43,15 +50,20 @@ void main() {
     a1 = A('a1');
     a1_copy = a1;
     a2 = A('a2');
+    a3 = A('a1');
   });
 
   group('Group of tests', () {
-    test('First Test', () {
-      expect(a1, a1_copy);
+    test('Comparing copies', () {
+      expect(a1, a1_copy); // Pass.
     });
-    test('Second Test', () {
-      expect(a1, a2);
+    test('Comparing different objects', () {
+      expect(a1, a2); // Fail.
     });
+    test('Using custom matcher function.', () {
+      expect(a1, a3, isEqual: isEqualA); // Pass.
+    });
+
   });
 }
 ```
@@ -86,7 +98,7 @@ While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
 [`group`][group], [`test`][test_function], and [`expect`][expect].
 Otherwise, the output printed by the method [`expect`][expect] might not
-occur on the right line making it difficult to identify which tests failed/passed.
+occur on the right line making it difficult to read the test output.
 However, the total number of failed/passed tests
 is reported correctly.
 
