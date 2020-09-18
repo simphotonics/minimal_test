@@ -1,5 +1,7 @@
-## Minimal Test
+# Minimal Test
 [![Build Status](https://travis-ci.com/simphotonics/minimal_test.svg?branch=master)](https://travis-ci.com/simphotonics/minimal_test)
+
+## Introduction
 
 A minimalist library for writing simple tests.
 Using this package introduces no further dependencies other than Dart SDK >= 2.9.0.
@@ -22,7 +24,8 @@ exits abnormally.
  * [`test`][test_function]: The body of this function usually contains one or several calls to [`expect`][expect].
  * [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
  * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
- * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match. (Matching should be understood as a form of lax equality test. For example  two lists match if their entries match.)
+ * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match.
+ (Matching should be understood as a form of lax equality test. For example  two lists match if their entries match.)
 
   <details><summary> Show test file content. </summary>
 
@@ -76,7 +79,7 @@ exits abnormally.
 
 
 
-#### 3. Run the tests in the `test` folder by naviagting to the package root and using the command:
+#### 3. Run the tests in the package `test` folder by navigating to the package root and using the command:
 
 ```Console
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
@@ -91,7 +94,7 @@ $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart exampl
 
 To keep the library as simple as possible, test files are not parsed
 and there is no provision to generate and inspect a node-structure of
-test-groups and tests. As such, shuffling of tests is not supported.
+test-groups and tests. As such, shuffling of tests is currently not supported.
 
 While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
