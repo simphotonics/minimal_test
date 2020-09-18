@@ -109,7 +109,7 @@ void expect(
         : expected.toString().indent(8, skipFirstLine: true);
 
     final difference =
-        (expected is String) ? actualString - expectedString : '';
+        (actual is String && expected is String) ? actual - expected : '';
 
     // Add hashCode if printed objects are identical.
     if (actualString == expectedString) {
@@ -120,7 +120,8 @@ void expect(
     print('      Actual:   $actualString');
     print('      Expected: $expectedString');
     if (difference.isNotEmpty) {
-      print('      Difference: $difference');
+      print('      Difference: '
+          '${difference.indentedBlock(8, skipFirstLine: true)}');
     }
 
     try {
