@@ -1,3 +1,8 @@
+## 0.0.7
+
+- Added library `matcher.dart`.
+- Enables comparing collections with matching entries.
+
 ## 0.0.6
 
 - Set min SDK version to 2.9.0.
