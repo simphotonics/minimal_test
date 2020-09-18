@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'matcher.dart';
 import 'test.dart';
 import 'exceptions/failed_test_exception.dart';
 import 'utils/string_utils.dart';
@@ -84,24 +85,40 @@ FutureOr<void> tearDownAll(dynamic Function() callback) {
 }
 
 /// Compares [expected] with [actual] and throws a [FailedTestException] if
-/// the two objects are not equal.
-void expect(dynamic expected, dynamic actual, {String reason = ''}) {
-  if (expected == actual) {
+/// the two objects do not match.
+/// * Custom objects may be compared using the function `isEqual`. This is
+/// useful if the equality operator cannot be overriden.
+/// * Collections are matched entry by entry in a recursive fashion.
+void expect(
+  dynamic actual,
+  dynamic expected, {
+  String reason = '',
+  IsMatching? isMatching,
+}) {
+  if (match(actual, expected, isMatching: isMatching)) {
     print('    passed${reason.isEmpty ? '' : ': $reason'}');
   } else {
     print('    failed${reason.isEmpty ? '' : ': $reason'}');
-    final expectedString = (expected is String)
-        ? expected.indentedBlock(8, skipFirstLine: true)
-        : expected.toString().indent(8, skipFirstLine: true);
-    final actualString = (actual is String)
+
+    var actualString = (actual is String)
         ? actual.indentedBlock(8, skipFirstLine: true)
         : actual.toString().indent(8, skipFirstLine: true);
 
-    final difference =
-        (expected is String) ? expectedString - actualString : '';
+    var expectedString = (expected is String)
+        ? expected.indentedBlock(8, skipFirstLine: true)
+        : expected.toString().indent(8, skipFirstLine: true);
 
-    print('      Expected: $expectedString');
+    final difference =
+        (expected is String) ? actualString - expectedString : '';
+
+    // Add hashCode if printed objects are identical.
+    if (actualString == expectedString) {
+      actualString += ' (hashCode: ${actual.hashCode})';
+      expectedString += ' (hashCode: ${expected.hashCode})';
+    }
+
     print('      Actual:   $actualString');
+    print('      Expected: $expectedString');
     if (difference.isNotEmpty) {
       print('      Difference: $difference');
     }
