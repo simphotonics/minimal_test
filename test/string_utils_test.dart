@@ -77,6 +77,10 @@ void main() {
           'First line.\nSecond line.' - 'First line,\nSecond line.',
           '.\n'
           'Second line.');
+      expect(
+        'First line.\nSecond line.' - 'First line.\nSecond line',
+        '.',
+      );
     });
   });
 
