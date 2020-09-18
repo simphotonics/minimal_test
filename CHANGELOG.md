@@ -1,3 +1,8 @@
+## 0.0.8
+
+- Restructured `README.md`
+- Changed output of function `expect()` to show non-matching strings.
+
 ## 0.0.7
 
 - Added library `matcher.dart`.
