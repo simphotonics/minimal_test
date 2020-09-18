@@ -28,6 +28,7 @@ final _list = [1, 2, 3];
 final _map = {1: 'one', 2: 'two'};
 final _hashMap = HashMap<int, String>.from(_map);
 final _splayTreeMap = SplayTreeMap<int, String>.from(_map);
+final _listView = UnmodifiableListView(_list);
 
 /// Matcher tests.
 void main() {
@@ -35,6 +36,7 @@ void main() {
     test('Different types', () {
       expect(match(0, []), false);
       expect(match(<int>[], <double>[]), false);
+      expect(match(<int>[], []), false);
     });
     test('Same type', () {
       expect(match([], []), true);
@@ -45,9 +47,13 @@ void main() {
     });
     test('Set {1,2,3}', () {
       expect(match(_set, {1, 2, 3}), true);
+      expect(match(_set, {}), false);
+      expect(match({}, {}), true);
+      expect(match(<int>{}, {}), false);
     });
     test('Map {1: \'one\', 2: \'two\'}', () {
       expect(match(_map, {1: 'one', 2: 'two'}), true);
+      expect(match(<int,dynamic>{}, {}), false);
     });
     test('HashMap {1: \'one\', 2: \'two\'}', () {
       expect(match(_hashMap, {1: 'one', 2: 'two'}), true);
@@ -55,6 +61,10 @@ void main() {
     test('SplayTreeMap: {1: \'one\', 2: \'two\'}', () {
       expect(match(_splayTreeMap, {1: 'one', 2: 'two'}), true);
     });
+    test('UnmodifiableListView [1,2,3]', () {
+      expect(match(_listView, [1, 2, 3]), true);
+    });
+
     test('Map<int,List<int>>', () {
       expect(
           match(
