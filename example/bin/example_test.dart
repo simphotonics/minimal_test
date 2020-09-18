@@ -12,7 +12,7 @@ class A {
 }
 
 /// Custom matcher for class A.
-bool isMatchingA(left, right){
+bool isMatchingA(left, right) {
   if (left is! A || right is! A) return false;
   return left.msg == right.msg;
 }
@@ -33,6 +33,5 @@ void main() {
     test('Using custom matcher function.', () {
       expect(a1, a3, isMatching: isMatchingA); // Pass.
     });
-
   });
 }
