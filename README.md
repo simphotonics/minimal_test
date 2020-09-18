@@ -6,7 +6,7 @@ Using this package introduces no further dependencies other than Dart SDK >= 2.9
 Aimed at testing Dart VM scripts using null-safety.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
-recommended to use the official package [test].
+recommended to use the [official package test].
 
 Note: In the context of this package, the functions [`group`][group] and [`test`][test_function] are merely used to organize and label tests and test-groups.
 Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all *expect-tests* are passed and none of the test files
@@ -74,7 +74,7 @@ exits abnormally.
 
   </details>
 
-  
+
 
 #### 3. Run the tests in the `test` folder by naviagting to the package root and using the command:
 
@@ -111,7 +111,7 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/simphotonics/minimal_test/tracker
 
-[test]: https://pub.dev/packages/test
+[official package test]: https://pub.dev/packages/test
 
 [async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
 
