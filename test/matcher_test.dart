@@ -53,7 +53,7 @@ void main() {
     });
     test('Map {1: \'one\', 2: \'two\'}', () {
       expect(match(_map, {1: 'one', 2: 'two'}), true);
-      expect(match(<int,dynamic>{}, {}), false);
+      expect(match(<int, dynamic>{}, {}), false);
     });
     test('HashMap {1: \'one\', 2: \'two\'}', () {
       expect(match(_hashMap, {1: 'one', 2: 'two'}), true);
