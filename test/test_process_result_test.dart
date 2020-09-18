@@ -5,6 +5,7 @@ import 'package:minimal_test/src/process/test_process.dart';
 import 'package:minimal_test/src/process/test_process_result.dart';
 import 'package:minimal_test/src/utils/color_options.dart';
 
+/// Test related to class `TestProcessResult`.
 Future<void> main() async {
   final testFiles = [
     'test/src/class_a_test.dart',
@@ -35,7 +36,7 @@ Future<void> main() async {
           exitMsg.message,
           '\n'
           'Number of failed tests: 4.\n'
-          'Exiting with ExitCode.SomeTestsFailed: 2.',
+          'Exiting with ExitCode.SomeTestsFailed.',
         );
         expect(exitMsg.code, 2);
       });
