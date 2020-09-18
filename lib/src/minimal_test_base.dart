@@ -84,9 +84,9 @@ FutureOr<void> tearDownAll(dynamic Function() callback) {
   _teardownAllCallback = callback;
 }
 
-/// Compares [expected] with [actual] and throws a [FailedTestException] if
+/// Compares [actual] with [expected] and throws a [FailedTestException] if
 /// the two objects do not match.
-/// * Custom objects may be compared using the function `isEqual`. This is
+/// * Custom objects may be compared using the callback `isMatching`. This is
 /// useful if the equality operator cannot be overriden.
 /// * Collections are matched entry by entry in a recursive fashion.
 void expect(

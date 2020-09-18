@@ -1,13 +1,12 @@
 /// Provides the recursive function `match` for comparing collections.
 library matcher;
 
-/// Function used to register a custom matcher with function `match`.
+/// Type of a callback function used to register a custom matcher with `match`.
 typedef IsMatching = bool Function(dynamic left, dynamic right);
 
 /// Returns `true` if `left` matches `right`.
-/// * Specify the matcher function `isEqual` to match custom objects.
 /// * Handles build-in collection objects recursively.
-/// * Use the callback `isEqual` to register a custom matcher.
+/// * Use the callback `isMatching` to register a custom matcher.
 bool match(dynamic left, dynamic right, {IsMatching? isMatching}) {
   if (left == right) return true;
 
