@@ -1,6 +1,7 @@
 import 'package:minimal_test/minimal_test.dart';
 import 'package:minimal_test/src/utils/string_utils.dart';
 
+/// Testing functions and extensions provided by library `string_utils`.
 void main() {
   group('block', () {
     test('empty', () {
