@@ -10,11 +10,11 @@ class A {
   }
 }
 
-late A a1;
-late A a1_copy;
-late A a2;
-
 void main() {
+  final a1 = A('a1');
+  final a1_copy = a1;
+  final a2 = A('a2');
+
   test('1) outside group', () {
     expect('a', 'b');
   });
@@ -24,12 +24,6 @@ void main() {
   });
 
   group('Class A', () {
-    setUpAll(() {
-      a1 = A('a1');
-      a1_copy = a1;
-      a2 = A('a2');
-    });
-
     test('equality of copies', () {
       expect(a1, a1_copy);
     });

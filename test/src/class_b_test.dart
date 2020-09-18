@@ -12,18 +12,12 @@ class B {
   }
 }
 
-late B b1;
-late B b1_copy;
-late B b2;
-
 void main() {
-  sleep(Duration(seconds: 1));
-  setUpAll(() {
-    b1 = B('b1');
-    b1_copy = b1;
-    b2 = B('b2');
-  });
+  sleep(Duration(microseconds: 20));
 
+  final b1 = B('b1');
+  final b1_copy = b1;
+  
   group('Class B', () {
     test('equality of copies', () async {
       expect(b1, b1_copy);

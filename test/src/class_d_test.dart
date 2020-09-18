@@ -15,16 +15,10 @@ bool isMatchingD(left, right) {
   return left.msg == right.msg;
 }
 
-late D d1;
-late D d1_copy;
-late D d2;
-
 void main() {
-  setUpAll(() {
-    d1 = D('d1');
-    d1_copy = d1;
-    d2 = D('d1');
-  });
+  final d1 = D('d1');
+  final d1_copy = d1;
+  final d2 = D('d1');
 
   group('Class D', () {
     test('equality of copies', () async {

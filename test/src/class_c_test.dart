@@ -10,17 +10,10 @@ class C {
   }
 }
 
-late C c1;
-late C c1_copy;
-late C c2;
-
 void main() {
-  setUpAll(() {
-    c1 = C('c1');
-    c1_copy = c1;
-    c2 = C('c2');
-  });
-
+  final c1 = C('c1');
+  final c1_copy = c1;
+  
   group('Class C', () {
     test('equality of copies', () async {
       expect(c1, c1_copy);
