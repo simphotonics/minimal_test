@@ -85,8 +85,7 @@ $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
 Alternatively, the path to a test file or test directory may be specified:
 ```Console
-$ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
-test/src/class_a_test.dart
+$ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart test/src/class_a_test.dart
 ```
 
 
