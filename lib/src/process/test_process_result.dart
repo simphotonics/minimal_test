@@ -212,8 +212,8 @@ class TestProcessResult extends ProcessResult {
 
     if (exitCode == ExitCode.SomeTestsFailed.index) {
       msg = msg +
-          'Exiting with ExitCode.SomeTestsFailed: ' +
-          colorize(exitCode.toString(), RED, colorOutput) +
+          'Exiting with ' +
+          colorize(ExitCode.SomeTestsFailed.toString(), RED, colorOutput) +
           '.';
     }
     if (exitCode == 0) {
