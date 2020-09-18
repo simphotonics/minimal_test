@@ -1,3 +1,10 @@
+## 0.0.9
+
+- Relaxed matching of lists, sets, and maps. For example,
+ `match(<int>[1, 2], UnmodifiableListView([1, 2]))` returns `true` as does `match(<int>[1, 2], [1, 2]`.
+- Note **empty** lists, sets, and maps only match if they have the same runtime type.
+  For example: `match(<int>[], [])` returns `false`.
+
 ## 0.0.8
 
 - Restructured `README.md`
