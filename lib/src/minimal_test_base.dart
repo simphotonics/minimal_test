@@ -113,8 +113,10 @@ void expect(
 
     // Add hashCode if printed objects are identical.
     if (actualString == expectedString) {
-      actualString += ' (hashCode: ${actual.hashCode})';
-      expectedString += ' (hashCode: ${expected.hashCode})';
+      actualString += ' (${actual.runtimeType}, '
+          'hashCode: ${actual.hashCode})';
+      expectedString += ' (${expected.runtimeType}), '
+          '(hashCode: ${expected.hashCode})';
     }
 
     print('      Actual:   $actualString');
