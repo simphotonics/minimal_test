@@ -13,7 +13,7 @@ class C {
 void main() {
   final c1 = C('c1');
   final c1_copy = c1;
-  
+
   group('Class C', () {
     test('equality of copies', () async {
       expect(c1, c1_copy);

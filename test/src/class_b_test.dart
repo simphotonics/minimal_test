@@ -17,7 +17,7 @@ void main() {
 
   final b1 = B('b1');
   final b1_copy = b1;
-  
+
   group('Class B', () {
     test('equality of copies', () async {
       expect(b1, b1_copy);
