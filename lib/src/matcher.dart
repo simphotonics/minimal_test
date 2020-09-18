@@ -32,7 +32,7 @@ bool match(dynamic left, dynamic right, {IsMatching? isMatching}) {
     return true;
   }
   if (left is Map && right is Map) {
-    // Can't check key and value type of an empty map. 
+    // Can't check key and value type of an empty map.
     if (left.runtimeType != right.runtimeType && left.isEmpty) return false;
     if (left.length != right.length) return false;
     for (final key in left.keys) {
