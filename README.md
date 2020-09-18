@@ -14,72 +14,70 @@ exits abnormally.
 
 ## Usage
 
-Include [`minimal_test`][minimal_test] as a `dev_dependency` in your
-`pubspec.yaml` file.
+#### 1. Include [`minimal_test`][minimal_test] as a `dev_dependency` in your `pubspec.yaml` file.
 
-The library provides the functions:
-* [`group`][group]: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
-    one or several calls to `test`.
-* [`test`][test_function]: The body of this function usually contains one or several calls to [`expect`][expect].
-* [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
-* [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
-* [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match. (Matching should be understood as a form of lax equality test. For example two lists match if their entries match.)
+#### 2. Write unit tests using the functions:
+ * [`group`][group]: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
+     one or several calls to `test`.
+ * [`test`][test_function]: The body of this function usually contains one or several calls to [`expect`][expect].
+ * [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
+ * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
+ * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match. (Matching should be understood as a form of lax equality test. For example  two lists match if their entries match.)
 
-The functions above can be used to write unit tests:
+  <details><summary> Show test file content. </summary>
 
-```Dart
-import 'package:minimal_test/minimal_test.dart';
+  ```Dart
+  import 'package:minimal_test/minimal_test.dart';
 
-/// Custom object
-class A {
-  A(this.msg);
-  final String msg;
+  /// Custom object
+  class A {
+    A(this.msg);
+    final String msg;
 
-  @override
-  String toString() {
-    return 'A: $msg';
+    @override
+    String toString() {
+      return 'A: $msg';
+    }
   }
-}
 
-/// Custom matcher for class A.
-bool isMatchingA(left, right){
-  if (left is! A || right is! A) return false;
-  return left.msg == right.msg;
-}
+  /// Custom matcher for class A.
+  bool isMatchingA(left, right){
+    if (left is! A || right is! A) return false;
+    return left.msg == right.msg;
+  }
 
-void main() {
-  final a1 = A('a1');
-  final a1_copy = a1;
-  final a2 = A('a2');
-  final a3 = A('a1');
+  void main() {
+    final a1 = A('a1');
+    final a1_copy = a1;
+    final a2 = A('a2');
+    final a3 = A('a1');
 
-  group('Group of tests', () {
-    test('Comparing copies', () {
-      expect(a1, a1_copy); // Pass.
+    group('Group of tests', () {
+      test('Comparing copies', () {
+        expect(a1, a1_copy); // Pass.
+      });
+      test('Comparing different objects', () {
+        expect(a1, a2, 'Expected to fail.'); // Fail.
+      });
+      test('Using custom matcher function', () {
+        expect(a1, a3, isMatching: isMatching); // Pass.
+      });
+
     });
-    test('Comparing different objects', () {
-      expect(a1, a2, 'Expected to fail.'); // Fail.
-    });
-    test('Using custom matcher function', () {
-      expect(a1, a3, isMatching: isMatching); // Pass.
-    });
+  }
+  ```
+  </details>
 
-  });
-}
-```
-<details> <summary> Show console output (test report). </summary>
+  <details> <summary> Show console output (test report). </summary>
 
-![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
+  ![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
 
-</details>
+  </details>
 
-The script `bin\minimal_test.dart` attempts to find test-files specified
-by the user. If no path is provided, the progam will scan the folder `test`.
-It then attempts to run each test-file and generate a report by inspecting
-the process stdout, stderr, and exit codes.
+  
 
-To run the tests in the `test` folder of your package,
-navigate to the package root and use:
+#### 3. Run the tests in the `test` folder by naviagting to the package root and using the command:
+
 ```Console
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
