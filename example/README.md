@@ -9,7 +9,9 @@
 While it is possible to run **asynchronous** tests, it is recommended
 to await the completion of the objects being tested before issuing a call to
 `group`, `test`, and `expect`. Otherwise, the output of `expect` might not
-occur on the right line resulting in a confusing test-report.
+occur on the right line making the test-report difficult to read.
+Nevertheless, the total number of failed/passed tests is reported correctly.
+
 File [`async_test.dart`][async_test.dart] shows how to
 test the result of a future calculation:
 ```Dart
@@ -64,4 +66,4 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: https://github.com/simphotonics/minimal_test
 
-[async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/async_test.dart
+[async_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/example/bin/async_test.dart
