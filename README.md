@@ -25,7 +25,7 @@ exits abnormally.
  * [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
  * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
  * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match.
- (Matching should be understood as a form of lax equality test. For example  two lists match if their entries match.)
+ (Matching should be understood as a form of lax equality test. For example, two lists match if their entries match, however two empty list with different runtime type do not match. For more information see [`matcher_test.dart`][matcher_test.dart]).
 
   <details><summary> Show test file content. </summary>
 
@@ -121,6 +121,8 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 [expect]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
 
 [group]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
+
+[matcher_test.dart]: https://github.com/simphotonics/minimal_test/blob/master/test/matcher_test.dart
 
 [minimal_test]: https://pub.dev/packages/minimal_test
 
