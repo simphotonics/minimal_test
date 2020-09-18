@@ -14,6 +14,9 @@ exits abnormally.
 
 ## Usage
 
+Include [`minimal_test`][minimal_test] as a `dev_dependency` in your
+`pubspec.yaml` file.
+
 The library provides the functions:
 * [`group`][group]: Used to label a group of tests. The argument `body`, a function returning `void` or `FutureOr<void>`, usually contains
     one or several calls to `test`.
@@ -22,9 +25,12 @@ The library provides the functions:
 * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
 * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match. (Matching should be understood as a form of lax equality test. For example two lists match if their entries match.)
 
+The functions above can be used to write unit tests:
+
 ```Dart
 import 'package:minimal_test/minimal_test.dart';
 
+/// Custom object
 class A {
   A(this.msg);
   final String msg;
@@ -35,44 +41,45 @@ class A {
   }
 }
 
-bool isEqualA(left, right){
+/// Custom matcher for class A.
+bool isMatchingA(left, right){
   if (left is! A || right is! A) return false;
   return left.msg == right.msg;
 }
 
-
-late A a1;
-late A a1_copy;
-late A a2;
-
 void main() {
-  setUpAll(() {
-    a1 = A('a1');
-    a1_copy = a1;
-    a2 = A('a2');
-    a3 = A('a1');
-  });
+  final a1 = A('a1');
+  final a1_copy = a1;
+  final a2 = A('a2');
+  final a3 = A('a1');
 
   group('Group of tests', () {
     test('Comparing copies', () {
       expect(a1, a1_copy); // Pass.
     });
     test('Comparing different objects', () {
-      expect(a1, a2); // Fail.
+      expect(a1, a2, 'Expected to fail.'); // Fail.
     });
-    test('Using custom matcher function.', () {
-      expect(a1, a3, isEqual: isEqualA); // Pass.
+    test('Using custom matcher function', () {
+      expect(a1, a3, isMatching: isMatching); // Pass.
     });
 
   });
 }
 ```
+<details> <summary> Show console output (test report). </summary>
+
+![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
+
+</details>
+
 The script `bin\minimal_test.dart` attempts to find test-files specified
 by the user. If no path is provided, the progam will scan the folder `test`.
 It then attempts to run each test-file and generate a report by inspecting
 the process stdout, stderr, and exit codes.
 
-To run the tests in the `test` folder, navigate to the package root and use:
+To run the tests in the `test` folder of your package,
+navigate to the package root and use:
 ```Console
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 ```
@@ -82,11 +89,6 @@ $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
 test/src/class_a_test.dart
 ```
 
-<details> <summary> Show console output. </summary>
-
-![Console Output](https://raw.githubusercontent.com/simphotonics/minimal_test/master/images/console_output.svg?sanitize=true)
-
-</details>
 
 ## Limitations
 
@@ -119,6 +121,8 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 [expect]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
 
 [group]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/group.html
+
+[minimal_test]: https://pub.dev/packages/minimal_test
 
 [setUpAll]: https://pub.dev/documentation/minimal_test/doc/api/minimal_test/setUpAll.html
 
