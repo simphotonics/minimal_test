@@ -1,3 +1,7 @@
+## 0.1.0
+
+- Set min SDK version to 2.10.0. 
+
 ## 0.0.9
 
 - Relaxed matching of lists, sets, and maps. For example,
