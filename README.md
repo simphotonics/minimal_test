@@ -91,6 +91,38 @@ Alternatively, the path to a test file or test directory may be specified:
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart example/bin/example_test.dart
 ```
 
+## Features
+
+* The function `expect()` has the optional parameter `precision` enabling approximate
+matching of objects of type `num`. The default value of `precision` is `1.0e-12`.
+ ```Dart
+   // Returns true.
+   match(1.0, 0.999999999999);
+   // Test passed.
+   expect(1, 0.999999999999);
+
+   // Returns false.
+   match(1.0, 0.99998);
+   // Test failed.
+   expect(1, 0.9999);
+ ```
+
+ * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match, that is
+   a set and a list do not match even if they have identical entries. 
+
+  ```Dart
+    // Test passed.
+    expect([1.0, 2.0, 3.0], [1.0 - 1.0e-14, 2.0, 3.0]);
+
+    // Test failed
+    final list1 = <int>[1, 2];
+    expect(list1, <double>[1.0, 2.0])
+
+    // Test passed.
+    expect({ 1: [10, 11], 2: [12, 13]},
+           { 1: [10, 11], 2: [12, 13]},
+          );
+  ```
 
 ## Limitations
 
