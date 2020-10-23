@@ -1,6 +1,12 @@
+## 0.1.1-nullsafety
+
+- Added optional parameter `precision` to functions `expect()` and `match()`.
+  It can be used to approximately match object of type `num`.
+  Example: `match(1.0, 1.0 - 1.0e-13)` returns `true` since the default precision is `1.0e-12`.
+
 ## 0.1.0-nullsafety
 
-- Set min SDK version to 2.10.0.
+- Min SDK version set to 2.10.0.
 
 ## 0.0.9
 
