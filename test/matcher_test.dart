@@ -41,6 +41,10 @@ void main() {
       expect(match(1, 1 - 1.0e-13), true);
       expect(match(1, 1.0e-11), false);
     });
+    test('precision', () {
+      expect(match(1, 1 - 1.0e-6), false);
+      expect(match(1, 1 - 1.0e-6, precision: 1e-4), true);
+    });
   });
   group('Collection', () {
     test('Different types', () {
@@ -56,17 +60,7 @@ void main() {
       expect(match(_list, [1, 2, 3]), true);
     });
     test('List [1.0, 2.0, 3.0]', () {
-      expect(
-          match([
-            1.0,
-            2.0,
-            3.0
-          ], [
-            1.0 - 1e-13,
-            2.0,
-            3.0,
-          ]),
-          true);
+      expect(match([1.0, 2.0, 3.0], [1.0 - 1e-13, 2.0, 3.0]), true);
     });
     test('Set {1,2,3}', () {
       expect(match(_set, {1, 2, 3}), true);
@@ -91,16 +85,13 @@ void main() {
 
     test('Map<int,List<int>>', () {
       expect(
-          match(
-            {
-              1: [10, 11],
-              2: [12, 13]
-            },
-            {
-              1: [10, 11],
-              2: [12, 13]
-            },
-          ),
+          match({
+            1: [10, 11],
+            2: [12, 13]
+          }, {
+            1: [10, 11],
+            2: [12, 13]
+          }),
           true);
     });
   });

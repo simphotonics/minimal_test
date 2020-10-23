@@ -97,7 +97,12 @@ void expect(
   IsMatching? isMatching,
   num precision = 1e-12,
 }) {
-  if (match(actual, expected, isMatching: isMatching)) {
+  if (match(
+    actual,
+    expected,
+    isMatching: isMatching,
+    precision: precision,
+  )) {
     print('    passed${reason.isEmpty ? '' : ': $reason'}');
   } else {
     print('    failed${reason.isEmpty ? '' : ': $reason'}');
