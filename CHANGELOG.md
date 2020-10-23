@@ -1,3 +1,7 @@
+## 0.1.2-nullsafety
+
+- The function `expect()` now passes the argument `precision` when calling `match()`.
+
 ## 0.1.1-nullsafety
 
 - Added optional parameter `precision` to functions `expect()` and `match()`.
