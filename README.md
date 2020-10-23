@@ -107,8 +107,8 @@ matching of objects of type `num`. The default value of `precision` is `1.0e-12`
    expect(1, 0.9999);
  ```
 
- * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match, that is
-   a set and a list do not match even if they have identical entries. 
+ * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match,  for example
+   a `Set` and a `List` do not match even if they have identical entries.
 
   ```Dart
     // Test passed.
