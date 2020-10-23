@@ -32,6 +32,16 @@ final _listView = UnmodifiableListView(_list);
 
 /// Matcher tests.
 void main() {
+  group('Numericals', () {
+    test('1.0 and 0.99999999999', () {
+      expect(match(0.999999999999, 1.0), true);
+      expect(match(0.999999, 1.0), false);
+    });
+    test('1 and (1 - 1.0e-13)', () {
+      expect(match(1, 1 - 1.0e-13), true);
+      expect(match(1, 1.0e-11), false);
+    });
+  });
   group('Collection', () {
     test('Different types', () {
       expect(match(0, []), false);
@@ -44,6 +54,19 @@ void main() {
     });
     test('List [1,2,3]', () {
       expect(match(_list, [1, 2, 3]), true);
+    });
+    test('List [1.0, 2.0, 3.0]', () {
+      expect(
+          match([
+            1.0,
+            2.0,
+            3.0
+          ], [
+            1.0 - 1e-13,
+            2.0,
+            3.0,
+          ]),
+          true);
     });
     test('Set {1,2,3}', () {
       expect(match(_set, {1, 2, 3}), true);

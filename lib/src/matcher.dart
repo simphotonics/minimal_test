@@ -7,8 +7,25 @@ typedef IsMatching = bool Function(dynamic left, dynamic right);
 /// Returns `true` if `left` matches `right`.
 /// * Handles build-in collection objects recursively.
 /// * Use the callback `isMatching` to register a custom matcher.
-bool match(dynamic left, dynamic right, {IsMatching? isMatching}) {
+/// * Numerical object may be matched within a given `precision`.
+///   For a precision of `1.0e-12`, the comparison
+///  `1.0 == 0.999999999999` returns `true`.
+bool match(
+  dynamic left,
+  dynamic right, {
+  IsMatching? isMatching,
+  num precision = 1.0e-12,
+}) {
+  // User provided matcher.
+  if (isMatching != null) {
+    return isMatching(left, right);
+  }
+
   if (left == right) return true;
+
+  if (left is num && right is num) {
+    return ((right - left).abs() < precision) ? true : false;
+  }
 
   if (left is Iterable && right is Iterable) {
     if (left.runtimeType != right.runtimeType) {
@@ -38,14 +55,6 @@ bool match(dynamic left, dynamic right, {IsMatching? isMatching}) {
       if (!match(left[key], right[key])) return false;
     }
     return true;
-  }
-
-  if (isMatching != null) {
-    if (isMatching(left, right)) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   return false;

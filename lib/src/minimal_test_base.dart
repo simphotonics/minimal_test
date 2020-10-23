@@ -89,11 +89,13 @@ FutureOr<void> tearDownAll(dynamic Function() callback) {
 /// * Custom objects may be compared using the callback `isMatching`. This is
 /// useful if the equality operator cannot be overriden.
 /// * Collections are matched entry by entry in a recursive fashion.
+/// * The argument `precision` is used to match `num`s approximately.
 void expect(
   dynamic actual,
   dynamic expected, {
   String reason = '',
   IsMatching? isMatching,
+  num precision = 1e-12,
 }) {
   if (match(actual, expected, isMatching: isMatching)) {
     print('    passed${reason.isEmpty ? '' : ': $reason'}');
