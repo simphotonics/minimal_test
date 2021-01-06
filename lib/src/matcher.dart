@@ -7,7 +7,7 @@ typedef IsMatching = bool Function(dynamic left, dynamic right);
 /// Returns `true` if `left` matches `right`.
 /// * Handles build-in collection objects recursively.
 /// * Use the callback `isMatching` to register a custom matcher.
-/// * Numerical object may be matched within a given `precision`.
+/// * Numerical objects may be matched within a given `precision`.
 ///   For a precision of `1.0e-12`, the comparison
 ///  `1.0 == 0.999999999999` returns `true`.
 bool match(
