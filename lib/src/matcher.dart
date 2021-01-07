@@ -24,7 +24,7 @@ bool match(
   if (left == right) return true;
 
   if (left is num && right is num) {
-    return ((right - left).abs() < precision) ? true : false;
+    return ((right - left).abs() < precision.abs()) ? true : false;
   }
 
   if (left is Iterable && right is Iterable) {
@@ -43,7 +43,9 @@ bool match(
     final lit = left.iterator;
     final rit = right.iterator;
     while (lit.moveNext() && rit.moveNext()) {
-      if (!match(lit.current, rit.current)) return false;
+      if (!match(lit.current, rit.current, precision: precision)) {
+        return false;
+      }
     }
     return true;
   }
@@ -52,7 +54,9 @@ bool match(
     if (left.runtimeType != right.runtimeType && left.isEmpty) return false;
     if (left.length != right.length) return false;
     for (final key in left.keys) {
-      if (!match(left[key], right[key])) return false;
+      if (!match(left[key], right[key], precision: precision)) {
+        return false;
+      }
     }
     return true;
   }
