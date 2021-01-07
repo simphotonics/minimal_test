@@ -56,6 +56,17 @@ void main() {
       expect(match([], []), true);
       expect(match(<int>[], <int>[]), true);
     });
+    test('Numerical', () {
+      expect(
+        match(
+          <double>[1.79],
+          <double>[1.79 + 1e-6],
+          precision: 1.0e-6,
+        ),
+        true,
+      );
+      expect(<double>[1.0], <double>[1.0 - 1e-6], precision: 1);
+    });
     test('List [1,2,3]', () {
       expect(match(_list, [1, 2, 3]), true);
     });
