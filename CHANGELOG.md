@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Added `pedantic` under `dev_dependencies`.
+- Fixed bug in function `match`.
+
 ## 0.1.2-nullsafety
 
 - The function `expect()` now passes the argument `precision` when calling `match()`.
