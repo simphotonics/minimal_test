@@ -1,3 +1,7 @@
+## 0.1.5-nullsafety
+
+- Amended `bin/minimal_test.dart` help message.
+
 ## 0.1.4-nullsafety
 
 - Amended `README.md` section `Features`.

@@ -3,7 +3,7 @@ name: minimal_test
 description: Minimalist library for testing Dart VM scripts using null-safety
   features. Has no dependencies other than Dart SDK >=2.10.0.
 
-version: 0.1.4-nullsafety
+version: 0.1.5-nullsafety
 
 homepage: https://github.com/simphotonics/minimal_test
 
