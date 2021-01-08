@@ -25,9 +25,13 @@ exits abnormally.
  * [`setUpAll`][setUpAll]: A callback that is run before the `body` of [`test`][test_function].
  * [`tearDownAll`][tearDownAll]: A callback that is run after the `body` of [`test`][test_function] has finished.
  * [`expect`][expect]: Compares two objects. An expect-test is considered passed if the two objects match.
- (Matching should be understood as a form of lax equality test.
+ (Matching should be understood as a form of *lax* equality test.
  For example, two lists match if their entries match, however two empty list with different
- runtime type do not match. For more information see [`matcher_test.dart`][matcher_test.dart]).
+ runtime types do not match. For more information see [`matcher_test.dart`][matcher_test.dart]).
+ The function accepts the optional parameter `precision`. Its default value is 1e-12 and it is
+ used to match numerical objects.
+ If `(expected - actual).abs() < precision` the two objects are matching.
+
 
   <details><summary> Show test file content. </summary>
 
