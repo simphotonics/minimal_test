@@ -1,7 +1,7 @@
 ## 0.1.3
 
 - Added `pedantic` under `dev_dependencies`.
-- Fixed bug in function `match`.
+- Fixed bug in function `match` where the parameter `precision` was not passed on during recursive calls.
 
 ## 0.1.2-nullsafety
 
