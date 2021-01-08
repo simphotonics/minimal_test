@@ -28,10 +28,6 @@ exits abnormally.
  (Matching should be understood as a form of *lax* equality test.
  For example, two lists match if their entries match, however two empty list with different
  runtime types do not match. For more information see [`matcher_test.dart`][matcher_test.dart]).
- The function accepts the optional parameter `precision`. Its default value is 1e-12 and it is
- used to match numerical objects.
- If `(expected - actual).abs() < precision` the two objects are matching.
-
 
   <details><summary> Show test file content. </summary>
 
@@ -101,14 +97,20 @@ $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart exampl
 matching of objects of type `num`. The default value of `precision` is `1.0e-12`.
  ```Dart
    // Returns true.
-   match(1.0, 0.999999999999);
+   match(1, 0.999999999999);
    // Test passed.
    expect(1, 0.999999999999);
 
    // Returns false.
-   match(1.0, 0.99998);
+   match(1.0, 0.9999);
    // Test failed.
-   expect(1, 0.9999);
+   expect(1.0, 0.9999);
+
+   // Returns true.
+   match(1.0. 0.9999, precision: 1e-3);
+   // Test passed.
+   expect(1.0, 0.9999, precision: 1e-3);
+
  ```
 
  * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match. For example
