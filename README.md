@@ -11,7 +11,8 @@ For features like test-shuffling, restricting tests to certain platforms, stream
 recommended to use the [official package test].
 
 Note: In the context of this package, the functions [`group`][group] and [`test`][test_function] are merely used to organize and label tests and test-groups.
-Each call to [`expect`][expect] is counted as a test. A test run will complete successfully if all *expect-tests* are passed and none of the test files
+Each call to [`expect`][expect] is counted as a test.
+A test run will complete successfully if all *expect-tests* are passed and none of the test files
 exits abnormally.
 
 ## Usage
@@ -81,7 +82,7 @@ exits abnormally.
 
 
 
-#### 3. Run the tests in the package `test` folder by navigating to the package root and using the command:
+#### 3. Run the tests in the package `test` folder by navigating to the package root and issuing the command:
 
 ```Console
 $ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
@@ -114,15 +115,14 @@ matching of objects of type `num`. The default value of `precision` is `1.0e-12`
  ```
 
  * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match. For example
-   a `Set` does not match a `List` even the two have identical entries.
+   a `Set` does not match a `List` even if the two have identical entries.
 
   ```Dart
     // Test passed.
     expect([1.0, 2.0, 3.0], [1.0 - 1.0e-14, 2.0, 3.0]);
 
     // Test failed
-    final list1 = <int>[1, 2];
-    expect(list1, <double>[1.0, 2.0])
+    expect(<int>[1, 2], <double>[1.0, 2.0])
 
     // Test passed.
     expect({ 1: [10, 11], 2: [12, 13]},
