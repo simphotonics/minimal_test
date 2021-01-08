@@ -1,4 +1,8 @@
-## 0.1.3
+## 0.1.4-nullsafety
+
+- Amended `README.md` section `Features`.
+
+## 0.1.3-nullsafety
 
 - Added `pedantic` under `dev_dependencies`.
 - Fixed bug in function `match` where the parameter `precision` was not passed on during recursive calls.
