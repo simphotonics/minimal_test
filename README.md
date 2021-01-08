@@ -115,7 +115,7 @@ matching of objects of type `num`. The default value of `precision` is `1.0e-12`
  ```
 
  * Iterables and maps are matched in a recursive fashion. The types of the two objects have to match. For example
-   a `Set` does not match a `List` even if the two have identical entries.
+   a `Set` does not match a `List` even if they have identical entries.
 
   ```Dart
     // Test passed.
