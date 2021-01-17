@@ -4,8 +4,8 @@
 ## Introduction
 
 A minimalist library for writing simple tests.
-Using this package introduces no further dependencies other than Dart SDK >= 2.10.0.
-Aimed at testing Dart VM scripts using null-safety.
+Using this package introduces no further dependencies other than Dart SDK >= 2.12.0-0.
+Aimed at testing Dart VM scripts using null-safety features.
 
 For features like test-shuffling, restricting tests to certain platforms, stream-matchers, complex asynchronous tests, it is
 recommended to use the [official package test].
