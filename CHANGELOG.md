@@ -1,3 +1,7 @@
+## 2.0.1-nullsafety
+
+- Updated console output image.
+
 ## 2.0.0-nullsafety
 
 - Increased minimum Dart SDK version to 2.12.0-0.
