@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Increased minimum Dart SDK version to 2.12.0-0.
+- Removed references to experiment non-nullable.
+
 ## 0.1.5-nullsafety
 
 - Amended `bin/minimal_test.dart` help message.
