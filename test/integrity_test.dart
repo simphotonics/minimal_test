@@ -5,25 +5,21 @@ import 'package:minimal_test/minimal_test.dart';
 Future<void> main() async {
   // Processes
   final processA = await Process.run('dart', [
-    '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
     'test/src/class_a_test.dart',
     '--disable-color',
   ]);
   final processB = await Process.run('dart', [
-    '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
     'test/src/class_b_test.dart',
     '--disable-color',
   ]);
   final processC = await Process.run('dart', [
-    '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
     'test/src/class_c_test.dart',
     '--disable-color',
   ]);
   final processD = await Process.run('dart', [
-    '--enable-experiment=non-nullable',
     'bin/minimal_test.dart',
     'test/unknown.dart',
     '--disable-color',
@@ -31,7 +27,7 @@ Future<void> main() async {
 
   final String usage = (await Process.run(
     'dart',
-    ['--enable-experiment=non-nullable', 'bin/minimal_test.dart', '-h'],
+    ['bin/minimal_test.dart', '-h'],
   ))
       .stdout;
 
@@ -80,7 +76,7 @@ Future<void> main() async {
           processA.stdout,
           'Finding test files: \n'
           '  test/src/class_a_test.dart\n'
-          'Running test: dart --enable-experiment=non-nullable test/src/class_a_test.dart\n'
+          'Running test: dart test/src/class_a_test.dart\n'
           '  test-1: 1) outside group\n'
           '      failed\n'
           '        Actual:   \'a\'\n'
@@ -117,12 +113,12 @@ Future<void> main() async {
           processB.stdout,
           'Finding test files: \n'
           '  test/src/class_b_test.dart\n'
-          'Running test: dart --enable-experiment=non-nullable test/src/class_b_test.dart\n'
+          'Running test: dart test/src/class_b_test.dart\n'
           '  group-1: Class B\n'
           '    test-1: equality of copies\n'
           '      passed\n'
           '  \n'
-          'Command: dart --enable-experiment=non-nullable test/src/class_b_test.dart \n'
+          'Command: dart test/src/class_b_test.dart \n'
           '  exited abnormally with code: 255. \n'
           'Try using the option --verbose for more details.\n'
           'Some tests may have been skipped. \n'

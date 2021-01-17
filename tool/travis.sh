@@ -37,7 +37,7 @@ echo
 dartanalyzer --version
 echo
 
-dartanalyzer --enable-experiment=non-nullable \
+dartanalyzer \
     --fatal-warnings \
     --fatal-infos \
     --packages="$PWD/.packages" \
@@ -47,4 +47,4 @@ dartanalyzer --enable-experiment=non-nullable \
 echo
 echo -e "${CYAN}=== Testing $PWD...${RESET}"
 echo
-dart --enable-experiment=non-nullable bin/minimal_test.dart
+dart bin/minimal_test.dart

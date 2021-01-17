@@ -58,7 +58,6 @@ Future<void> main(List<String> args) async {
     fResults.add(TestProcess.runTest(
       'dart',
       [
-        '--enable-experiment=non-nullable',
         file.path,
       ],
     ));

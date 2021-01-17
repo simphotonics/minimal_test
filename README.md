@@ -85,11 +85,11 @@ exits abnormally.
 #### 3. Run the tests in the package `test` folder by navigating to the package root and issuing the command:
 
 ```Console
-$ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart
+$ pub run minimal_test:minimal_test.dart
 ```
 Alternatively, the path to a test file or test directory may be specified:
 ```Console
-$ pub run --enable-experiment=non-nullable minimal_test:minimal_test.dart example/bin/example_test.dart
+$ pub run minimal_test:minimal_test.dart example/bin/example_test.dart
 ```
 
 ## Features

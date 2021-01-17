@@ -72,22 +72,3 @@ class Worker {
     command.sendPort.send(result);
   }
 }
-
-/// Usage of TestWorker.
-// void main() async {
-//   stdout.writeln('spawning isolate...');
-
-//   final testWorker = Worker(cmd: 'dart', options: [
-//     '--enable-experiment=non-nullable',
-//     'test/class_a_test.dart',
-//   ]);
-//   final result = await testWorker.result;
-//   print(result.stdout);
-//   print(result.stderr);
-
-//   stdout.writeln('press enter key to quit...');
-//   await stdin.first;
-//   testWorker.dispose();
-//   stdout.writeln('goodbye!');
-//   exit(0);
-// }

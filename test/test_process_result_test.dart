@@ -18,7 +18,6 @@ Future<void> main() async {
     fResults.add(TestProcess.runTest(
       'dart',
       [
-        '--enable-experiment=non-nullable',
         file,
       ],
     ));
@@ -48,7 +47,7 @@ Future<void> main() async {
         );
         expect(
           exitMsg.message,
-          'Command: dart --enable-experiment=non-nullable test/src/class_b_test.dart \n'
+          'Command: dart test/src/class_b_test.dart \n'
           '  exited abnormally with code: 255. \n'
           '\n'
           'Some tests may have been skipped. \n'
