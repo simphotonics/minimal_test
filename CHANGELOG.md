@@ -1,4 +1,4 @@
-## 2.0.0
+## 2.0.0-nullsafety
 
 - Increased minimum Dart SDK version to 2.12.0-0.
 - Removed references to experiment non-nullable.
